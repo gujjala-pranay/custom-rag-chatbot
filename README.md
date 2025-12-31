@@ -40,42 +40,29 @@ graph TD
 
 ## ⚙️ Setup and Installation
 
-### Prerequisites
+For a detailed, step-by-step guide on API keys, system environment variables, and Docker, please refer to the **[SETUP_GUIDE.md](./SETUP_GUIDE.md)**.
 
-*   Python 3.9+
-*   `pip` package manager
+### Quick Start (Local)
 
-### 1. Clone the Repository
+1.  **Clone the Repository:**
+    \`\`\`bash
+    git clone https://github.com/gujjala-pranay/custom-rag-chatbot.git
+    cd custom-rag-chatbot
+    \`\`\`
 
-\`\`\`bash
-git clone <repository-url>
-cd custom-rag-chatbot
-\`\`\`
+2.  **Configure Environment:**
+    Create a `.env` file with your `OPENAI_API_KEY` and `HUGGINGFACEHUB_API_TOKEN`.
 
-### 2. Install Dependencies
+3.  **Run with Docker (Recommended):**
+    \`\`\`bash
+    docker-compose up --build
+    \`\`\`
 
-\`\`\`bash
-pip install -r requirements.txt
-\`\`\`
-
-### 3. Configure Environment Variables
-
-Create a file named `.env` in the root directory based on the provided `.env.example`.
-
-\`\`\`ini
-# .env
-OPENAI_API_KEY=your_openai_api_key_here
-HUGGINGFACEHUB_API_TOKEN=your_huggingface_token_here
-# ... other optional keys
-\`\`\`
-
-### 4. Run the Chatbot
-
-Navigate to the `ui` directory and run the Streamlit application:
-
-\`\`\`bash
-streamlit run ui/app.py
-\`\`\`
+4.  **Run Manually:**
+    \`\`\`bash
+    pip install -r requirements.txt
+    streamlit run ui/app.py
+    \`\`\`
 
 The application will open in your web browser, typically at `http://localhost:8501`.
 
