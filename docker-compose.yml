@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  rag-chatbot:
+    build: .
+    container_name: custom-rag-chatbot
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./faiss_index:/app/faiss_index
+    restart: always

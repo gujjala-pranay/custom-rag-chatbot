@@ -13,18 +13,33 @@ class LLMService:
     """
     
     def __init__(self, provider: str = "openai", model_name: Optional[str] = None, temperature: float = 0.1):
-        self.provider = provider.lower()
         self.temperature = temperature
-        
-        if self.provider == "openai":
-            self.model_name = model_name or "gpt-4o-mini"
-            self.llm = self._init_openai()
-        elif self.provider == "llama3" or self.provider == "huggingface":
-            # Default to LLaMA-3-8B-Instruct if no model name is provided
-            self.model_name = model_name or "meta-llama/Meta-Llama-3-8B-Instruct"
-            self.llm = self._init_huggingface()
+        self.llm = self._initialize_with_fallback(provider, model_name)
+
+    def _initialize_with_fallback(self, preferred_provider: str, model_name: Optional[str]) -> Any:
+        """Initialize LLM with fallback logic if the preferred provider fails."""
+        providers_to_try = []
+        if preferred_provider.lower() in ["openai"]:
+            providers_to_try = ["openai", "huggingface"]
         else:
-            raise ValueError(f"Unsupported provider: {self.provider}. Choose 'openai' or 'llama3'.")
+            providers_to_try = ["huggingface", "openai"]
+
+        errors = []
+        for provider in providers_to_try:
+            try:
+                if provider == "openai":
+                    self.provider = "openai"
+                    self.model_name = model_name if preferred_provider == "openai" else "gpt-4o-mini"
+                    return self._init_openai()
+                elif provider == "huggingface":
+                    self.provider = "huggingface"
+                    self.model_name = model_name if preferred_provider != "openai" else "meta-llama/Meta-Llama-3-8B-Instruct"
+                    return self._init_huggingface()
+            except Exception as e:
+                errors.append(f"{provider.upper()} failed: {str(e)}")
+                continue
+        
+        raise RuntimeError(f"All LLM providers failed. Errors: {'; '.join(errors)}")
 
     def _init_openai(self) -> ChatOpenAI:
         """Initialize OpenAI Chat model."""
