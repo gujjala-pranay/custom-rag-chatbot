@@ -40,7 +40,7 @@ graph TD
 
 ## ⚙️ Setup and Installation
 
-For a detailed, step-by-step guide on API keys, system environment variables, and Docker, please refer to the **[SETUP_GUIDE.md](./SETUP_GUIDE.md)**.
+For a detailed, step-by-step guide on API keys, system environment variables, and Docker, please refer to the **[SETUP_GUIDE.md](./SETUP_GUIDE.md)**. For quick execution steps, see **[EXECUTION_STEPS.md](./EXECUTION_STEPS.md)**.
 
 ### Quick Start (Local)
 
