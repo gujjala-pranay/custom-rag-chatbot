@@ -1,6 +1,6 @@
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
 class RAGPipeline:
     def __init__(self, llm, vector_db):

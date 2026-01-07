@@ -1,6 +1,6 @@
 from typing import List
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.schema import Document
+from langchain_core.documents import Document
 
 class ChunkManager:
     def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):
